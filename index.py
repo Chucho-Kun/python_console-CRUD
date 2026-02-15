@@ -34,13 +34,13 @@ def app():
             editar_contacto()
             preguntar = False
         elif opcion == 3:
-            print(res3)
+            mostrar_contactos()
             preguntar = False
         elif opcion == 4:
-            print(res4)
+            buscar_contacto()
             preguntar = False
         elif opcion == 5:
-            print(res5)
+            eliminar_contacto()
             preguntar = False
         else:
             print('Opcion no válida')
@@ -100,8 +100,54 @@ def editar_contacto():
 
         # Renombrar el archivo editado
         os.rename(CARPETA + contacto_original + EXTENSION, CARPETA + nombre_contacto + EXTENSION)
+
+        # Mensaje de exito
+        print('Contacto editado correctamente...')
+
     else:
         print('Ese usuario no existe')
+
+    # Reiniciar app
+    app()
+
+def mostrar_contactos():
+    archivos = os.listdir(CARPETA)
+
+    # Solo filtrar archivos .txt
+    archivos_txt = [i for i in archivos if i.endswith(EXTENSION)]
+
+    for archivo in archivos_txt:
+        with open(CARPETA + archivo) as contacto:
+            for linea in contacto:
+                # Imprime los resultados
+                print(linea.rstrip())
+            print('\n')
+
+def buscar_contacto():
+    nombre = input('Que contacto desea buscar \r\n')
+
+    try:
+        with open(CARPETA + nombre + EXTENSION) as contacto:
+            print('\r\n Informacion del contacto: \r\n')
+            for linea in contacto:
+                print(linea.rstrip())
+            print('\r\n')
+    except IOError:
+        print('El contacto no existe')
+
+    # reiniciar app
+    app()
+
+def eliminar_contacto():
+    nombre = input('Seleccione el Contacto a eliminar: \r\n')
+
+    try:
+        os.remove(CARPETA + nombre + EXTENSION)
+        print('\r\n Contacto eliminado...')
+    except IOError:
+        print('No se encontro ese contacto')
+
+    app()
 
 def motrar_menu():
     print('Seleccione del Menú lo que desea hacer:')

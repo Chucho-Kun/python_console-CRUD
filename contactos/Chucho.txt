@@ -1,0 +1,3 @@
+Nombre: Chucho
+Telefono: 234234
+Categoria: Super Usuario
