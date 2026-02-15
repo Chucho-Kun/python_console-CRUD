@@ -1,0 +1,3 @@
+Nombre: Tessy
+Telefono: 234234
+Categoria: Chica de Pelea
